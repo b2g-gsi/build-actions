@@ -1,4 +1,5 @@
-
+#!/bin/bash
+set -e 
         df -h
         #####
         sudo apt install git make mercurial  yasm  libncurses5 libfuse-dev
@@ -18,20 +19,13 @@
         cd ~
         git config --global user.name "ci"
         git config --global user.email "ci@github.com"
-        #ssh
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+
         #rclone
+        cd ~
         mkdir -p ~/.config/rclone
-        git clone git@github.com:ittat/tmp.git
-        cd tmp
-        mv ./rclone.conf ~/.config/rclone
-        #sudo apt install rclone
+        #your drive key
+        echo "$RCLONE" > ~/.config/rclone/rclone.conf
         brew install rclone
-        #rclone -v
-        rclone ls itd:test
-        # yarn
-        #sudo apt-get install yarnpkg
-        yarn
-        #sudo ln -snf /usr/bin/yarnpkg /usr/bin/yarn
+        echo [TEST] rclone
+        rclone ls itd:
+        echo [Done] rclone
