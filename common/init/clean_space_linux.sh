@@ -1,4 +1,5 @@
-
+#!/bin/bash
+set -e 
         df -h
         echo ————————————————————————————————————
         sudo rm -rf "/usr/local/share/boost"
