@@ -19,16 +19,9 @@ set -e
         export OUT_DIR_COMMON_BASE=${out_work}
         export PREFERRED_B2G="${work}/pre-gecko/${gecko_version}"
         
-        if [ ${kernel} == "true" ]; then
-                ./build.sh -j16 bootimage
-        else
-        
         ./build.sh -j16 systemimage
 
         if [ "$device_name" == "onyx" ]; then
-                #./build.sh -j16 dist DIST_DIR=dist_output
-                #./build.sh -j16 systemimage
-                #./build/tools/releasetools/ota_from_target_files dist_output/b2g_onyx-target_files-eng.runner.zip onyx_b2g_ota_update.zip
         else
                 ./build.sh -j16 vndk-test-sepolicy
         fi
