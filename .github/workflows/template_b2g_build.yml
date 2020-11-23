@@ -38,7 +38,7 @@ jobs:
     - name: Clean system environment
       continue-on-error: true
       run: |
-        ./init/all_unmount_darwin.sh
+        ./commom/init/all_unmount_darwin.sh
         
         
     - name: Initialization system environment
