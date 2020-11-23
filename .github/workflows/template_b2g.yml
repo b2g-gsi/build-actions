@@ -11,17 +11,16 @@ on:
       
 env:
   image: ${{github.event.client_payload.image}}
-  PROIMAGE: ${{github.event.client_payload.image}}_${{github.event.client_payload.device_name}}
   remotepath: ${{github.event.client_payload.image}}_${{github.event.client_payload.device_name}}
   work: /Volumes/${{github.event.client_payload.image}} 
-  out_work: /Volumes/out
-  out_path: /Volumes/out/B2G
   gecko_version:  ${{github.event.client_payload.gecko_version}} 
   device_name: ${{github.event.client_payload.device_name}} 
   device_arch: ${{github.event.client_payload.device_arch}} 
   systemimage: system.img.xz
   sourceimage: source
   outimage: out
+  out_work: /Volumes/out
+  out_path: /Volumes/out/B2G
 
 jobs: 
   repack_aosp:        
@@ -64,11 +63,11 @@ jobs:
         
     - name: Start build job          
       run: |
-        ./android/init/webhook.sh build
+        ./android/init/webhook.sh b2g_aosp_build
         #curl -H "Authorization: token ${{secrets.GIT_ACCESS_TOKEN}}"   --request POST   --data '{"event_type": "aosp_build","client_payload": {"image":"'${image}'", "gecko_version":"'${gecko_version}'", "device_name":"'${device_name}'","device_arch":"'${device_arch}'","kernel":"'${kernel}'"}}'   https://api.github.com/repos/OnePlus-onyx/build-CI/dispatches
    
   aosp_build:
-    if: github.event.action == 'aosp_build' || github.event.action == 'b2g_build' 
+    if: github.event.action == 'b2g_aosp_build' || github.event.action == 'b2g_b2g_build' 
     runs-on: macos-latest
     timeout-minutes: 360
     steps:
@@ -106,7 +105,7 @@ jobs:
         fi
         
     - name: Build Source Without Gecko
-      if: github.event.action == 'aosp_build'
+      if: github.event.action == 'b2g_aosp_build'
       continue-on-error: true
       id: build
       run: |
@@ -118,22 +117,18 @@ jobs:
         
         ./build/build_without_gecko.sh
         
-    - name: Add prebuilt api daemon
-      if: github.event.action == 'b2g_build'
-      run: |
-          ./build/add_pre_api_daemon.sh
-        
+
     - name: B2G Build - Build Source include Gecko
-      if: github.event.action == 'b2g_build'
+      if: github.event.action == 'b2g_b2g_build'
       run: |
         df -h
-        ####
+        ./build/add_pre_api_daemon.sh
+        
+        #### build
         cd ${work}
         sudo rm -rf ./B2G/gonk-misc/Android.mk
         cp ./Android.mk.gonk.old B2G/gonk-misc/Android.mk 
           
-        ####  build
-        cd ${CloudPower}
         ./build/build_with_gecko.sh
         
     - name: Check Current ”error.log“ Status
@@ -150,19 +145,18 @@ jobs:
          
     - name: Repack b2g-sysroot and api-sysroot
       id: sysroot
-      if: github.event.action == 'aosp_build' && steps.check.conclusion == 'success' &&  steps.build.outcome == 'success' && steps.build.conclusion == 'success'
+      if: github.event.action == 'b2g_aosp_build' && steps.check.conclusion == 'success' &&  steps.build.outcome == 'success' && steps.build.conclusion == 'success'
       run: |
         echo repack_b2g-sysroot
         ./build/repack_b2g-sysroot.sh
         echo repack_api-sysroot
         ./build/repack_api-sysroot.sh
         
-    - name: Upload b2g-sysroot and api-sysroot
-      if:  github.event.action == 'aosp_build' && steps.sysroot.conclusion == 'success' &&  steps.check.conclusion == 'success' &&  steps.build.outcome == 'success' && steps.build.conclusion == 'success'
-      run: |
+        echo Upload b2g-sysroot and api-sysroot
         ./source/upload_sysroot.sh
+        
     - name: Updoal systemimage
-      if:  github.event.action == 'b2g_build' 
+      if:  github.event.action == 'b2g_b2g_build' 
       continue-on-error: true
       run: |
         ####  
@@ -174,45 +168,30 @@ jobs:
         ./init/all_unmount_darwin.sh
         
     - name: Send "build_gecko" WebHook
-      if: github.event.action == 'aosp_build' && steps.check.conclusion == 'success' &&  steps.build.outcome == 'success' && steps.build.conclusion == 'success'
+      if: github.event.action == 'b2g_aosp_build' && steps.check.conclusion == 'success' &&  steps.build.outcome == 'success' && steps.build.conclusion == 'success'
       run: |
-       curl -H "Authorization: token ${{secrets.GIT_ACCESS_TOKEN}}"   --request POST   --data '{"event_type": "gecko_build","client_payload": {"image":"'${image}'", "gecko_version":"'${gecko_version}'", "device_name":"'${device_name}'","device_arch":"'${device_arch}'","kernel":"'${kernel}'"}}'   https://api.github.com/repos/OnePlus-onyx/build-CI/dispatches
- 
-    - name: release WebHook
-      if: github.event.action == 'b2g_build' 
-      run: |
-       curl -H "Authorization: token ${{secrets.GIT_ACCESS_TOKEN}}"   --request POST   --data '{"event_type": "release","client_payload": {"image":"'${image}'", "gecko_version":"'${gecko_version}'", "device_name":"'${device_name}'","device_arch":"'${device_arch}'","kernel":"'${kernel}'"}}'   https://api.github.com/repos/ittat/SuperBot/dispatches
+        ./android/init/webhook.sh b2g_gecko_build
+
+#     - name: release WebHook
+#       if: github.event.action == 'b2g_build' 
+#       run: |
+#        curl -H "Authorization: token ${{secrets.GIT_ACCESS_TOKEN}}"   --request POST   --data '{"event_type": "release","client_payload": {"image":"'${image}'", "gecko_version":"'${gecko_version}'", "device_name":"'${device_name}'","device_arch":"'${device_arch}'","kernel":"'${kernel}'"}}'   https://api.github.com/repos/ittat/SuperBot/dispatches
  
     - name: Update Build Source
-      if: steps.check.conclusion == 'success' &&  github.event.action == 'aosp_build' 
+      if: steps.check.conclusion == 'success' &&  github.event.action == 'b2g_aosp_build' 
       run: |
           ./source/upload_out_image.sh
             
     - name: Send "aosp_build" WebHook Again
-      if: github.event.action == 'aosp_build' && steps.build.outcome == 'failure' && steps.build.conclusion == 'success'  &&  steps.check.conclusion == 'success'         
+      if: github.event.action == 'b2g_aosp_build' && steps.build.outcome == 'failure' && steps.build.conclusion == 'success'  &&  steps.check.conclusion == 'success'         
       run: |
-        curl -H "Authorization: token ${{secrets.GIT_ACCESS_TOKEN}}"   --request POST   --data '{"event_type": "aosp_build","client_payload": {"image":"'${image}'", "gecko_version":"'${gecko_version}'", "device_name":"'${device_name}'","device_arch":"'${device_arch}'","kernel":"'${kernel}'"}}'   https://api.github.com/repos/OnePlus-onyx/build-CI/dispatches
-  
+        ./android/init/webhook.sh b2g_aosp_build
+
   gecko_build:
-    if: github.event.action == 'gecko_build' || github.event_name == 'schedule' 
+    if: github.event.action == 'b2g_gecko_build' || github.event_name == 'schedule' 
     runs-on: ubuntu-latest
     timeout-minutes: 360
-    defaults:
-      run:
-        working-directory: /home/runner/CloudPower/ci/
     steps:
-
-    - name: SSH
-      working-directory: /home/runner
-      run: |
-        cd ~
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        echo "${{secrets.GET_CLOUDPOWER}}" > ~/ssh_link.sh
-        chmod +x ~/ssh_link.sh
-        ~/ssh_link.sh
-        
     - name: Initialization system environment
       run: |
           ./init/docker_env_linux.sh
@@ -237,9 +216,7 @@ jobs:
         tar -xvf mozbuild.tar.bz2
         sudo rm mozbuild.tar.bz2
         cd ~
-        git clone https://github.com/kaiostech/gecko-b2g -b gonk 
-        #cd gecko-b2g
-        #git checkout -b 8adcdfd21c3dea054c31b2552c0c00e3517ebd7c 
+        git clone https://github.com/kaiostech/gecko-b2g -b gonk --depth=1
         df -h
         
     - name: Bootstrap Gecko
@@ -284,12 +261,12 @@ jobs:
         rclone copy ${{ env.B2G_OUT }} itd:ci/${remotepath}
         df -h
         
-    - name: Send "api-daemon_build" WebHook
+    - name: Send "b2g_api_daemon_build" WebHook
       run: |
-        curl -H "Authorization: token ${{secrets.GIT_ACCESS_TOKEN}}"   --request POST   --data '{"event_type": "api_daemon_build","client_payload": {"image":"'${image}'", "gecko_version":"'${B2G_OUT}'", "device_name":"'${device_name}'","device_arch":"'${device_arch}'","kernel":"'${kernel}'"}}'   https://api.github.com/repos/OnePlus-onyx/build-CI/dispatches
-  
+        ./android/init/webhook.sh b2g_api_daemon_build
+
   api-daemon_build:
-    if: github.event.action == 'api_daemon_build'
+    if: github.event.action == 'b2g_api_daemon_build'
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -354,4 +331,4 @@ jobs:
 
     - name: Send Done Notify && Send "b2g_build" WebHook
       run: |
-          curl -H "Authorization: token ${{secrets.GIT_ACCESS_TOKEN}}"   --request POST   --data '{"event_type": "b2g_build","client_payload": {"image":"'${image}'", "gecko_version":"'${gecko_version}'", "device_name":"'${device_name}'","device_arch":"'${device_arch}'","kernel":"'${kernel}'"}}'   https://api.github.com/repos/OnePlus-onyx/build-CI/dispatches
+        ./android/init/webhook.sh b2g_b2g_build
