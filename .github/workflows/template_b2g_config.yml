@@ -18,6 +18,7 @@ env:
   repo_dispatches: "https://api.github.com/repos/ittat-store/build-actions/dispatches"
   b2g_source: "https://github.com/ittat/B2G"
   b2g_branch: "master"
+  build_device_tag: gsi_arm64_ab
 
 jobs: 
   config:
