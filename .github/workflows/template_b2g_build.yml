@@ -10,9 +10,6 @@ on:
       - b2g_api_daemon_build
       
 env:
-  image: ${{github.event.client_payload.image}}
-  remotepath: ${{github.event.client_payload.image}}_${{github.event.client_payload.device_name}}
-  work: /Volumes/${{github.event.client_payload.image}} 
   gecko_version:  ${{github.event.client_payload.gecko_version}} 
   device_name: ${{github.event.client_payload.device_name}} 
   device_arch: ${{github.event.client_payload.device_arch}} 
@@ -20,11 +17,18 @@ env:
   repo_dispatches: ${{github.event.client_payload.repo_dispatches}}
   b2g_source: ${{github.event.client_payload.b2g_source}}
   b2g_branch: ${{github.event.client_payload.b2g_branch}}
+
+
   systemimage: system.img.xz
-  sourceimage: source
   outimage: out
-  out_work: /Volumes/out
   out_path: /Volumes/out/B2G
+  
+  image: b2g_gsi
+  sourceimage: b2g_gsi
+  work: /Volumes/b2g_gsi
+  out_work: /Volumes/out
+  remotepath: b2g_gsi_${{github.event.client_payload.device_name}}
+  
 
 jobs: 
   repack_aosp:        
