@@ -55,11 +55,17 @@ jobs:
         ./b2g/source/repo_source.sh
         
     - name: Fix source
+      continue-on-error: true
       run: |    
         echo Fix source 
         ./b2g/source/fix_soucre.sh
         sudo rm -rf .repo
-           
+        
+    - name: build source
+      run: |    
+        cd ${work}/B2G
+        ./build-gsi.sh gsi_arm64_ab systemimage
+                  
     # upload sparseimage to gdrive
     - name: Upload Source 
       run: |
