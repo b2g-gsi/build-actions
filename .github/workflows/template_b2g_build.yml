@@ -10,6 +10,8 @@ on:
       - b2g_api_daemon_build
       
 env:
+  RCLONE: ${{secrets.RCLONE}}
+  GIT_ACCESS_TOKEN: ${{secrets.GIT_ACCESS_TOKEN}}
   gecko_version:  ${{github.event.client_payload.gecko_version}} 
   device_name: ${{github.event.client_payload.device_name}} 
   device_arch: ${{github.event.client_payload.device_arch}} 
