@@ -16,6 +16,7 @@ set -e
         
         chmod +x ${work}/B2G/patcher/patch_reset.sh
         cd ${work}/B2G
+        echo 1234
         ./patcher/patch_reset.sh
         
         ####fix 10.15 issue
