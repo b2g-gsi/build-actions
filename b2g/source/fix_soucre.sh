@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e 
-        ####patcher        
+        ####patcher 
+        #todo
+        echo 123
+        cd ${work}/B2G
+        sudo rm -r patcher
+        git clone https://github.com/ittat/patcher -b test
+        
         if [ -d "${work}/B2G/patcher" ]; then
           echo apply patch
           chmod +x ${work}/B2G/patcher/patcher.sh
