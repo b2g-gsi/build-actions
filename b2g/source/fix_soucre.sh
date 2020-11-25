@@ -14,6 +14,10 @@ set -e
           ./patcher/patcher.sh
         fi
         
+        chmod +x ${work}/B2G/patcher/patch_reset.sh
+        cd ${work}/B2G
+        ./patcher/patch_reset.sh
+        
         ####fix 10.15 issue
         cd ${work}/B2G
         /usr/bin/sed -i '' '14d'  system/sepolicy/tests/Android.bp
