@@ -117,8 +117,6 @@ jobs:
       id: build
       run: |
         df -h
-        ####
-        cd ${work}
         
         ./b2g/build/build_without_gecko.sh
         
