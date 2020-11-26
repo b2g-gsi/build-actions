@@ -129,11 +129,7 @@ jobs:
         df -h
         ./b2g/build/add_pre_api_daemon.sh
         
-        #### build
-        cd ${work}
-        sudo rm -rf ./B2G/gonk-misc/Android.mk
-        cp ./Android.mk.gonk.old B2G/gonk-misc/Android.mk 
-          
+        #### build          
         ./b2g/build/build_with_gecko.sh
         
     - name: Check Current ”error.log“ Status
