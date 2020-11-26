@@ -119,8 +119,6 @@ jobs:
         df -h
         ####
         cd ${work}
-        sudo rm -rf ./B2G/gonk-misc/Android.mk
-        cp ./Android.mk.gonk.patch B2G/gonk-misc/Android.mk 
         
         ./b2g/build/build_without_gecko.sh
         
