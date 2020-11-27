@@ -39,7 +39,9 @@ jobs:
     timeout-minutes: 360
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
+      with:
+        ref: android-build
 
     - name: Clean system environment
       continue-on-error: true
@@ -80,7 +82,9 @@ jobs:
     timeout-minutes: 360
     steps:
     - name: Checkout
-      uses: actions/checkout@v1   
+      uses: actions/checkout@v2
+      with:
+        ref: android-build
           
     - name: Initialization system environment
       run: |
@@ -190,6 +194,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: android-build
+        
     - name: Initialization system environment
       run: |
           ./commom/init/env_linux.sh
