@@ -7,16 +7,20 @@ set -e
         sudo rm -r ./${sourceimage}.dmg.sparseimage.zst
         rclone copy itd:ci/${remotepath}/${outimage}.dmg.sparseimage ./
         
-        ###
-        #cd ~
-        #hdiutil resize -size 20g ./${outimage}.dmg.sparseimage
-        
         #####mount
         hdiutil attach /Users/runner/${sourceimage}.dmg.sparseimage -mountpoint ${work}
-        if [ -d "${work}/B2G/out" ];then
-          sudo rm -r ${work}/B2G/out
+        
+        source_path=${work}
+        if [ -d "${work}/B2G" ];then
+          source_path=${work}/B2G
+        fi
+        
+        if [ -d "${source_path}/out" ];then
+          sudo rm -r ${source_path}/out
         fi
         hdiutil attach /Users/runner/${outimage}.dmg.sparseimage -mountpoint  ${out_work}
-        sudo ln -s  ${out_path}  ${work}/B2G/out
+        ##TODO
+        mv ${out_work}/B2G/* ${out_work}
+        sudo ln -s  ${source_path}/out  ${out_work}
         ls -al ${out_work}
         df -h
