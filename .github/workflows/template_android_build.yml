@@ -97,7 +97,7 @@ jobs:
         /usr/local/bin/ccache  -M 20G
         /usr/local/bin/ccache -s
         export USE_CCACHE=1
-        export OUT_DIR_COMMON_BASE=${out_work}
+        #export OUT_DIR_COMMON_BASE=${out_work}
         cd ${work}
         . build/envsetup.sh
         lunch ${build_device_tag}
