@@ -16,7 +16,7 @@ set -e
         cd ${work}/B2G
         export DISABLE_SOURCES_XML=true
         export USE_PREBUILT_B2G=1
-        export OUT_DIR_COMMON_BASE=${out_work}
+        #export OUT_DIR_COMMON_BASE=${out_work}
         export PREFERRED_B2G="${work}/pre-gecko/${gecko_version}"
         
                 #gtimeout 245m ./build.sh -j16 systemimage
