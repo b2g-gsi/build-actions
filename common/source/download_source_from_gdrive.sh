@@ -13,10 +13,10 @@ set -e
         
         #####mount
         hdiutil attach /Users/runner/${sourceimage}.dmg.sparseimage -mountpoint ${work}
-        if [ -d "${work}/out" ];then
-          sudo rm -r ${work}/out
+        if [ -d "${work}/B2G/out" ];then
+          sudo rm -r ${work}/B2G/out
         fi
         hdiutil attach /Users/runner/${outimage}.dmg.sparseimage -mountpoint  ${out_work}
-        sudo ln -s  ${out_path}  ${work}/out
+        sudo ln -s  ${out_path}  ${work}/B2G/out
         ls -al ${out_work}
         df -h
