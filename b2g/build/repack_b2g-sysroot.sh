@@ -14,8 +14,10 @@
           export TARGET_ARCH=arm
           export TARGET_ARCH_VARIANT=armv7-a-neon
         fi
-
-        export GONK_PRODUCT_NAME=${device_name}
+        
+        . "${work}/B2G/.config"
+        export GONK_PRODUCT_NAME=${TARGET_NAME}
+        echo GONK_PRODUCT_NAME -- ${GONK_PRODUCT_NAME}
         
         if [ "$device_name" == "onyx" ]; then
           export TARGET_CPU_VARIANT=krait
