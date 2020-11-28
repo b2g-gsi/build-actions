@@ -19,6 +19,13 @@ env:
   b2g_source: "https://github.com/ittat/B2G"
   b2g_branch: "master"
   build_device_tag: gsi_arm64_ab
+  device_arch: aarch64-linux-android
+#onyx
+#phhgsi_arm64_a  
+#phhgsi_arm64_ab
+#phhgsi_arm_a 
+#phhgsi_arm_ab  
+#RUST_TARGET := armv7-linux-androideabi
 
 jobs: 
   config:
