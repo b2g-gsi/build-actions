@@ -21,6 +21,6 @@ set -e
         hdiutil attach /Users/runner/${outimage}.dmg.sparseimage -mountpoint  ${out_work}
         ##TODO
       #  mv ${out_work}/B2G/* ${out_work}
-        sudo ln -s  ${source_path}/out  ${out_work}
+        sudo ln -s  ${out_work} ${source_path}/out 
         ls -al ${out_work}
         df -h
