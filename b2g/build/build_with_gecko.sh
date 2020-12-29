@@ -20,6 +20,7 @@ set -e
         export PREFERRED_B2G="${work}/pre-gecko/${gecko_version}"
         
                 #gtimeout 245m ./build.sh -j16 systemimage
+        export SKIP_ABI_CHECKS=true 
         gtimeout 245m  ./build-gsi.sh gsi_arm64_ab systemimage
 
         if [ "$device_name" == "onyx" ]; then
