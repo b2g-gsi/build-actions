@@ -13,5 +13,6 @@ set -e
         export PREFERRED_B2G=${work}/b2g-dummy.tar.bz2
         export USE_PREBUILT_B2G=1
         #gtimeout 245m ./build.sh -j16 systemimage
+        export SKIP_ABI_CHECKS=true
         gtimeout 245m  ./build-gsi.sh gsi_arm64_ab systemimage
         df -h
