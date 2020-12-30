@@ -202,13 +202,11 @@ jobs:
         
     - name: Initialization system environment
       run: |
-          ls
-          chmod +x commom/init/env_linux.sh
-          ./commom/init/env_linux.sh
+          ./common/init/env_linux.sh
         
     - name: clean disk
       run: |
-         ./commom/init/clean_space_linux.sh
+         ./common/init/clean_space_linux.sh
         
     - uses: hecrj/setup-rust-action@v1
       with:
