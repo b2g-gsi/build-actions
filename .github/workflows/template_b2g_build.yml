@@ -253,8 +253,10 @@ jobs:
           TARGET_ARCH=arm
           ARCH_ABI="androideabi"
         fi
-        echo "::set-env name=B2G_OUT::b2g-${version}.en-US.linux-${ARCH_ABI}-${TARGET_ARCH}.tar.gz"
-        
+        #echo "::set-env name=B2G_OUT::b2g-${version}.en-US.linux-${ARCH_ABI}-${TARGET_ARCH}.tar.gz"
+        echo "B2G_OUT=b2g-${version}.en-US.linux-${ARCH_ABI}-${TARGET_ARCH}.tar.gz" >> $GITHUB_ENV
+
+
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
