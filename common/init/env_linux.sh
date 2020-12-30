@@ -25,7 +25,8 @@ set -e
         mkdir -p ~/.config/rclone
         #your drive key
         echo "$RCLONE" > ~/.config/rclone/rclone.conf
-        brew install rclone
+        #brew install rclone
+        brew install --build-from-source rclone
         echo [TEST] rclone
         rclone ls itd:
         echo [Done] rclone
