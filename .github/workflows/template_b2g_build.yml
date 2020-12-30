@@ -202,6 +202,8 @@ jobs:
         
     - name: Initialization system environment
       run: |
+          ls
+          chmod +x commom/init/env_linux.sh
           ./commom/init/env_linux.sh
         
     - name: clean disk
