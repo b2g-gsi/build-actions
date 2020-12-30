@@ -192,7 +192,7 @@ jobs:
 
   gecko_build:
     if: github.event.action == 'b2g_gecko_build' || github.event_name == 'schedule' 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     timeout-minutes: 360
     steps:
     - name: Checkout
