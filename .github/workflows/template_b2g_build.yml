@@ -272,7 +272,7 @@ jobs:
         
     - name: Send "b2g_api_daemon_build" WebHook
       run: |
-        ./common/init/webhook.sh b2g_api_daemon_build
+        ./b2g/init/webhook.sh  b2g_api_daemon_build
 
   api-daemon_build:
     if: github.event.action == 'b2g_api_daemon_build'
