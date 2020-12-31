@@ -276,15 +276,18 @@ jobs:
 
   api-daemon_build:
     if: github.event.action == 'b2g_api_daemon_build'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     timeout-minutes: 360
     steps:
-    
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: android-build
+
     - name: Initialization system environment
       run: |
         df -h
         ./common/init/env_linux.sh
-        
         
     - name: Download Source
       run: |
