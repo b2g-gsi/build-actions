@@ -2,10 +2,6 @@
 set -e 
         df -h
         cd ${work}/B2G
-        chmod +x ~/build-CI/api_sysroot.sh
-        cp ~/build-CI/api_sysroot.sh ./
-        pip3 install zstandard
-        pip install zstandard
         
         if [ "$device_arch" == "aarch64-linux-android" ]; then
           export TARGET_ARCH=arm64
