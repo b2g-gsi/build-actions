@@ -151,6 +151,13 @@ jobs:
       id: sysroot
       if: github.event.action == 'b2g_aosp_build' && steps.check.conclusion == 'success' &&  steps.build.outcome == 'success' && steps.build.conclusion == 'success'
       run: |
+        chmod +x ./b2g/build/create-b2g-sysroot.sh
+        chmod +x ./b2g/build/api_sysroot.sh
+        cp ./b2g/build/create-b2g-sysroot.sh ${work}/B2G
+        cp ./b2g/build/api_sysroot.sh ${work}/B2G
+        pip3 install zstandard
+        pip install zstandard
+        
         echo repack_b2g-sysroot
         ./b2g/build/repack_b2g-sysroot.sh
         echo repack_api-sysroot
