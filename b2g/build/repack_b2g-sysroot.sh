@@ -1,12 +1,7 @@
-
-        cd ~
-        git clone https://github.com/OnePlus-onyx/build-CI -b b2g-tmp
-        chmod +x ~/build-CI/create-b2g-sysroot.sh
+#!/bin/bash
+set -e 
         df -h
         cd ${work}/B2G
-        cp ~/build-CI/create-b2g-sysroot.sh ./
-        pip3 install zstandard
-        pip install zstandard
         if [ "$device_arch" == "aarch64-linux-android" ]; then
           export TARGET_ARCH=arm64
           export TARGET_ARCH_VARIANT=armv8-a
