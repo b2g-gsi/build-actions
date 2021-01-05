@@ -306,7 +306,7 @@ jobs:
         rclone copy  itd:ci/${remotepath}/api-sysroot.tar.zst ./
         mkdir ~/.mozbuild/api-sysroot
         tar -C "$HOME/.mozbuild/api-sysroot" -I zstd -x -a -f api-sysroot.tar.zst
-        ls ~/.mozbuild/api-sysroot
+        ls ~/.mozbuild/api-sysroot/out
         
         cd ~
         git clone https://github.com/kaiostech/api-daemon 
