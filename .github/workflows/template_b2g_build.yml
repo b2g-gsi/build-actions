@@ -302,7 +302,7 @@ jobs:
         ####
         rustup target add aarch64-linux-android armv7-linux-androideabi
         cd ~
-        curl https://packages.preprod.kaiostech.com/ndk/v3/mozbuild.tar.bz2 | tar -C ${HOME}/ -xj
+        curl https://packages.preprod.kaiostech.com/ndk/v4/mozbuild.tar.bz2 | tar -C ${HOME}/ -xj
         rclone copy  itd:ci/${remotepath}/api-sysroot.tar.zst ./
         mkdir ~/.mozbuild/api-sysroot
         tar -C "$HOME/.mozbuild/api-sysroot" -I zstd -x -a -f api-sysroot.tar.zst
