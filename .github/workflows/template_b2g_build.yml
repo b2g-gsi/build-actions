@@ -96,8 +96,8 @@ jobs:
         
     - name: fix
       run: |         
-         brew install cpanm 
-         sudo cpan LWP::UserAgent
+         #brew install cpanm 
+         #sudo cpan LWP::UserAgent
          
          ####pre-api-daemon
          cd ~
