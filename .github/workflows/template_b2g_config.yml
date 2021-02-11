@@ -17,7 +17,7 @@ env:
   device_name: gsi_b2g
   repo_dispatches: "https://api.github.com/repos/b2g-gsi/build-actions/dispatches"
   b2g_source: "https://github.com/b2g-gsi/B2G"
-  b2g_branch: "b2g_gsi"
+  b2g_branch: "b2g-gsi"
   build_device_tag: gsi_arm64_ab
   device_arch: aarch64-linux-android
 #onyx
