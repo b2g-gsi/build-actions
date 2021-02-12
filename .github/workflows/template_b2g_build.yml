@@ -228,7 +228,7 @@ jobs:
       run: |
         df -h
         cd ~
-        curl https://packages.preprod.kaiostech.com/ndk/v3/mozbuild.tar.bz2 -o mozbuild.tar.bz2
+        curl https://packages.preprod.kaiostech.com/ndk/v4/mozbuild.tar.bz2 -o mozbuild.tar.bz2
         tar -xvf mozbuild.tar.bz2
         sudo rm mozbuild.tar.bz2
         cd ~
