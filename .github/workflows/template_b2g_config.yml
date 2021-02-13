@@ -1,5 +1,4 @@
 
-  api-daemon_build:
 name: template_b2g_config
 on: 
   workflow_dispatch:
