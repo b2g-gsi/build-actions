@@ -106,7 +106,7 @@ jobs:
          sudo rm mozbuild.tar.bz2
         
          #tmp
-         cd ${work}/gonk-misc
+         cd ${work}/B2G/gonk-misc
          sudo rm -r api-daemon
          git clone https://github.com/b2g-gsi/api-daemon -b without-api-daemon
 
