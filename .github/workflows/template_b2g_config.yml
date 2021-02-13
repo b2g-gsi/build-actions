@@ -1,3 +1,5 @@
+
+  api-daemon_build:
 name: template_b2g_config
 on: 
   workflow_dispatch:
@@ -36,5 +38,5 @@ jobs:
 
     - name: Action        
       run: |
-        ./b2g/init/webhook.sh b2g_aosp_build
+        ./b2g/init/webhook.sh  api-daemon_build
         #b2g_repack    b2g_aosp_build b2g_gecko_build
