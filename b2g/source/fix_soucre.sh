@@ -31,7 +31,7 @@ set -e
           echo api-daemon patch
           sudo rm -r ${work}/B2G/gonk-misc/api-daemon
         fi
-        git clone https://github.com/ittat/api-daemon -b ittat-patch-without-api-daemon
+        git clone https://github.com/b2g-gsi/api-daemon -b without-api-daemon
         
         
         ####
