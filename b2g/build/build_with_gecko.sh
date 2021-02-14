@@ -20,8 +20,4 @@ set -e
         export PREFERRED_B2G="${work}/pre-gecko/${gecko_version}"
         export SKIP_ABI_CHECKS=true 
         gtimeout 245m  ./build-gsi.sh ${build_device_tag} systemimage
-
-        if [ "$device_name" == "onyx" ]; then
-        else
-                ./build.sh -j16 vndk-test-sepolicy
-        fi
+        ./build-gsi.sh ${build_device_tag} vndk-test-sepolicy
