@@ -97,7 +97,7 @@ bionic/libc/kernel/uapi/asm-arm
 bionic/libc/kernel/android/scsi    
 bionic/libc/kernel/android/uapi  
 libnativehelper/include_deprecated
-out/target/product/${GONK_PRODUCT_NAME}"
+out/target/product/${GONK_PRODUCT_NAME}/obj"
 
 # Copy the system libraries to the sysroot
 LIBRARIES="out/target/product/${GONK_PRODUCT_NAME}/system/lib${BINSUFFIX}/android.hardware.gnss@1.0.so
