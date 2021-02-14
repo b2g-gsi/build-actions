@@ -9,7 +9,7 @@ set -e
         ls ${APIDeamon_PreBuild}
         
         ####
-        TARGET_OUT=${out_path}/target/product/${device_name}/system
+        TARGET_OUT=${out_work}/target/product/${device_name}/system
         path_api=${TARGET_OUT}/api-daemon
         if [ -d "${path_api}" ]; then
            sudo rm -r "${path_api}"
@@ -25,7 +25,4 @@ set -e
         
         cp -r  ${APIDeamon_PreBuild}/http_root  ${TARGET_OUT}/api-daemon
         cp ${APIDeamon_PreBuild}/${device_arch}/api-daemon ${TARGET_OUT}/bin/
-        
-        ls ${TARGET_OUT}/bin
-        ls -al ${TARGET_OUT}/bin/api-daemon
         chmod +x ${TARGET_OUT}/bin/api-daemon
