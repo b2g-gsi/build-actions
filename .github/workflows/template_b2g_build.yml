@@ -268,20 +268,20 @@ jobs:
           ARCH_ABI="androideabi"
         fi
         #echo "::set-env name=B2G_OUT::b2g-${version}.en-US.linux-${ARCH_ABI}-${TARGET_ARCH}.tar.bz2"
-        echo "B2G_OUT=b2g-${version}.en-US.linux-${ARCH_ABI}-${TARGET_ARCH}.tar.bz2" >> $GITHUB_ENV
+        echo "gecko_version=b2g-${version}.en-US.linux-${ARCH_ABI}-${TARGET_ARCH}.tar.bz2" >> $GITHUB_ENV
 
 
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
-        name: ${{ env.B2G_OUT }}
-        path: ~/objdir-gsi-gecko/dist/${{ env.B2G_OUT }}
+        name: ${{ env.gecko_version }}
+        path: ~/objdir-gsi-gecko/dist/${{ env.gecko_version }}
 
     - name: Upload to Gdrive
       run: |
         df -h
         cd ~/objdir-gsi-gecko/dist
-        rclone copy ${{ env.B2G_OUT }} itd:ci/${remotepath}
+        rclone copy ${{ env.gecko_version }} itd:ci/${remotepath}
         df -h
         
     - name: Send "b2g_api_daemon_build" WebHook
