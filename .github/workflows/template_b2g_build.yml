@@ -172,12 +172,12 @@ jobs:
         echo Upload b2g-sysroot and api-sysroot
         ./b2g/source/upload_sysroot.sh
         
-#     - name: Updoal systemimage
-#       if:  github.event.action == 'b2g_b2g_build' 
-#       continue-on-error: true
-#       run: |
-#         ####  
-#         ./source/upload_systemimage.sh
+    - name: Updoal systemimage
+      if:  github.event.action == 'b2g_b2g_build' 
+      continue-on-error: true
+      run: |
+         chmod +x ./b2g/source/upload_systemimage.sh  
+         ./b2g/source/upload_systemimage.sh
         
     - name: Clean system environment
       continue-on-error: true
