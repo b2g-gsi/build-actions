@@ -327,7 +327,7 @@ jobs:
         export TARGET_ARCH=${device_arch}
         export BUILD_WITH_NDK_DIR=~/.mozbuild/android-ndk-r20b-canary
         export GONK_DIR=~/.mozbuild/api-sysroot
-        export GONK_PRODUCT=${build_device_tag}
+        export GONK_PRODUCT=${device_name}
         cd ~/api-daemon
         ./update-prebuilts.sh
         
