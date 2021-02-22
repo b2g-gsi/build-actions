@@ -329,6 +329,9 @@ jobs:
         export GONK_DIR=~/.mozbuild/api-sysroot
         export GONK_PRODUCT=${device_name}
         cd ~/api-daemon
+        ### temp
+        mkdir -p ./target/aarch64-linux-android/release/symbols
+        ###
         ./update-prebuilts.sh
         
     - name: zip Artifact
