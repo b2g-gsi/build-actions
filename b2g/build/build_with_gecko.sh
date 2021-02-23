@@ -22,5 +22,4 @@ set -e
         #export SKIP_ABI_CHECKS=true
         #TODO fix ABI issue
         
-        gtimeout 245m  ./build-gsi.sh ${build_device_tag} systemimage SKIP_ABI_CHECKS=false
-        ./build-gsi.sh ${build_device_tag} vndk-test-sepolicy
+        gtimeout 245m  ./build.sh
