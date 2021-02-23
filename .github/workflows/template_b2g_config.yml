@@ -22,6 +22,8 @@ env:
   b2g_branch: "b2g-gsi"
   build_device_tag: gsi_arm64_ab
   device_arch: aarch64-linux-android
+  #TODO
+  gecko_version: b2g-87.0a1.en-US.linux-android-aarch64.tar.bz2
 #onyx
 #phhgsi_arm64_a  
 #phhgsi_arm64_ab
@@ -38,5 +40,5 @@ jobs:
 
     - name: Action        
       run: |
-        ./b2g/init/webhook.sh b2g_repack
+        ./b2g/init/webhook.sh b2g_b2g_build
         #b2g_repack    b2g_aosp_build b2g_gecko_build b2g_api_daemon_build
