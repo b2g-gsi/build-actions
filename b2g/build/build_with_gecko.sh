@@ -18,6 +18,9 @@ set -e
         export USE_PREBUILT_B2G=1
         #export OUT_DIR_COMMON_BASE=${out_work}
         export PREFERRED_B2G="${work}/pre-gecko/${gecko_version}"
-        export SKIP_ABI_CHECKS=true 
-        gtimeout 245m  ./build-gsi.sh ${build_device_tag} systemimage
+        
+        #export SKIP_ABI_CHECKS=true
+        #TODO fix ABI issue
+        
+        gtimeout 245m  ./build-gsi.sh ${build_device_tag} systemimage SKIP_ABI_CHECKS=false
         ./build-gsi.sh ${build_device_tag} vndk-test-sepolicy
