@@ -22,4 +22,4 @@ set -e
         #export SKIP_ABI_CHECKS=true
         #TODO fix ABI issue
         
-        gtimeout 245m  ./build.sh
+        gtimeout 245m  ./build.sh -j16
