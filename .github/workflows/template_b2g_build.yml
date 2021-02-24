@@ -109,6 +109,11 @@ jobs:
          cd ${work}/B2G/gonk-misc
          sudo rm -r api-daemon
          git clone https://github.com/b2g-gsi/api-daemon -b without-api-daemon
+         #TODO
+         cd ~
+         git clone https://github.com/b2g-gsi/platform_build -b gsi_q --depth=1
+         rm ${work}/B2G/build/make/target/product/aosp_arm64.mk
+         cp ~/target/product/aosp_arm64.mk ${work}/B2G/build/make/target/product/
 
     - name: Check The Previous “error.log”
       run: |
