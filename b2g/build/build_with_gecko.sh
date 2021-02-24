@@ -19,7 +19,6 @@ set -e
         #export OUT_DIR_COMMON_BASE=${out_work}
         export PREFERRED_B2G="${work}/pre-gecko/${gecko_version}"
         
-        #export SKIP_ABI_CHECKS=true
-        #TODO fix ABI issue
+        export SKIP_ABI_CHECKS=true
         
         gtimeout 245m  ./build.sh -j16 systemimage
