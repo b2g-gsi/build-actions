@@ -113,7 +113,7 @@ jobs:
          cd ~
          git clone https://github.com/b2g-gsi/platform_build -b gsi_q --depth=1
          rm ${work}/B2G/build/make/target/product/aosp_arm64.mk
-         cp ~/target/product/aosp_arm64.mk ${work}/B2G/build/make/target/product/
+         cp ~/platform_build/target/product/aosp_arm64.mk ${work}/B2G/build/make/target/product/
 
     - name: Check The Previous “error.log”
       run: |
