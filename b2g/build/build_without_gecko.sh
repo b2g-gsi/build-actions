@@ -9,9 +9,7 @@ set -e
         export USE_CCACHE=1
         cd ${work}/B2G
         export DISABLE_SOURCES_XML=true
-        #export OUT_DIR_COMMON_BASE=${out_work}
         export PREFERRED_B2G=${work}/b2g-dummy.tar.bz2
         export USE_PREBUILT_B2G=1
-        export SKIP_ABI_CHECKS=true
-        gtimeout 245m  ./build-gsi.sh ${build_device_tag} systemimage
+        gtimeout 245m  ./build.sh -j16
         df -h
