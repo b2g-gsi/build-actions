@@ -20,7 +20,7 @@ env:
   repo_dispatches: "https://api.github.com/repos/b2g-gsi/build-actions/dispatches"
   b2g_source: "https://github.com/ittat/B2G"
   b2g_branch: "oneplus3"
-  build_device_tag: aosp_oneplus3
+  build_device_tag: oneplus3
   device_arch: aarch64-linux-android
   actions_branch: oneplus3_build
 #onyx
