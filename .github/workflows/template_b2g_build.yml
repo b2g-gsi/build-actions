@@ -1,4 +1,3 @@
-  
 name: b2g-ci
 on: 
   repository_dispatch:
@@ -315,7 +314,7 @@ jobs:
         cd ~
         git clone https://github.com/kaiostech/api-daemon 
         #--depth=1
-        cd api-daemon
+        #cd api-daemon
         #git checkout 405f8d72005b0d753ea3a181246d4f5dbf129669 -b test
         ls -al
     - name: build Source
@@ -326,9 +325,6 @@ jobs:
         export GONK_DIR=~/.mozbuild/api-sysroot
         export GONK_PRODUCT=${device_name}
         cd ~/api-daemon
-        ### temp
-        mkdir -p ./target/aarch64-linux-android/release/symbols
-        ###
         ./update-prebuilts.sh
         
     - name: zip Artifact
