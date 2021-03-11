@@ -105,17 +105,7 @@ jobs:
          curl https://packages.preprod.kaiostech.com/ndk/v4/mozbuild.tar.bz2 -o mozbuild.tar.bz2
          tar -xvf mozbuild.tar.bz2
          sudo rm mozbuild.tar.bz2
-        
-         #tmp
-         cd ${work}/B2G/gonk-misc
-         sudo rm -r api-daemon
-         git clone https://github.com/b2g-gsi/api-daemon -b without-api-daemon
-         #TODO
-         cd ~
-         git clone https://github.com/b2g-gsi/platform_build -b gsi_q --depth=1
-         rm ${work}/B2G/build/make/target/product/aosp_arm64.mk
-         cp ~/platform_build/target/product/aosp_arm64.mk ${work}/B2G/build/make/target/product/
-
+         
     - name: Check The Previous “error.log”
       run: |
         if [ -d "${work}/B2G/out/error.log" ];then
