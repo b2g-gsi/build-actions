@@ -24,11 +24,11 @@ env:
   outimage: out
   out_path: /Volumes/out/B2G
   
-  image: b2g_gsi
-  sourceimage: b2g_gsi
-  work: /Volumes/b2g_gsi
+  image: b2g_${{github.event.client_payload.device_name}} 
+  sourceimage: b2g_${{github.event.client_payload.device_name}} 
+  work: /Volumes/b2g_${{github.event.client_payload.device_name}} 
   out_work: /Volumes/out
-  remotepath: b2g_gsi_${{github.event.client_payload.device_name}}
+  remotepath: b2g_${{github.event.client_payload.device_name}}
   actions_branch: ${{github.event.client_payload.actions_branch}}
   
 
