@@ -105,6 +105,12 @@ jobs:
          tar -xvf mozbuild.tar.bz2
          sudo rm mozbuild.tar.bz2
          
+         #TODO
+         cd ${work}/B2G/vendor
+         rm -r b2g
+         git clone https://github.com/ittat/vendor_b2g -b b2g_q
+         rm vendor_b2g b2g
+         
     - name: Check The Previous “error.log”
       run: |
         if [ -d "${work}/B2G/out/error.log" ];then
