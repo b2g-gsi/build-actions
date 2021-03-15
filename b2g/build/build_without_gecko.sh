@@ -11,6 +11,6 @@ set -e
         export DISABLE_SOURCES_XML=true
         export PREFERRED_B2G=${work}/b2g-dummy.tar.bz2
         export USE_PREBUILT_B2G=1
-        ./build.sh -j16 dex2oatd
+        ./build.sh -j16 dex2oat
         gtimeout 245m  ./build.sh -j16
         df -h
